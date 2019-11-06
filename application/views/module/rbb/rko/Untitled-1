@@ -1,0 +1,78 @@
+
+<script>
+    var data2 = <?php echo json_encode($dataBarangKel2); ?>;
+    // console.log(data2);
+   
+    $(document).on('change','.select-barang2', function(){
+        var barangId = $(this).val();
+            if(barangId == 0){
+                $(this).parents('.bapak-kelompok2').find('.input-lain2').prop('disabled',false).prop('name', 'kode[]').end()
+                .find('.input-estimasi2').val('').end()
+                .find('.input-nama2').val('').end()
+                .find('.input-total2').val('').end()
+                .find('.input-jumlah2').val('').end();
+                $(this).prop('name', '');
+
+            }else{
+                let estimasi = data2.filter(datanya => datanya.barang_id == barangId);
+                console.log(estimasi[0].barang_harga);
+                $(this).parents('.bapak-kelompok2').find('.input-lain2').val('').prop('disabled',true).prop('name', '').end()
+                .find('.input-nama2').val(estimasi[0].barang_nama).end()
+                .find('.input-estimasi2').val(estimasi[0].barang_harga);
+                $(this).prop('name', 'kode[]');
+            }
+    });
+
+    $(document).on('keyup', '.input-jumlah2', function(){
+        var angka = $(this).val();
+        var estimasi = $(this).parents('.bapak-kelompok2').find('.input-estimasi2').val().split('.').join("");
+        var total = (angka * estimasi);
+        $(this).parents('.bapak-kelompok2').find('.input-total2').val(total);
+        $('.masker').mask('000.000.000.000.000', {reverse: true,watchDataMask: true});
+
+    });
+
+    $(document).on('keyup', '.input-estimasi2', function(){
+        var estimasi = $(this).val().split('.').join("");
+        var angka = $(this).parents('.bapak-kelompok2').find('.input-jumlah2').val();
+        var total = (angka * estimasi);
+        $(this).parents('.bapak-kelompok2').find('.input-total2').val(total);
+        $('.masker').mask('000.000.000.000.000', {reverse: true,watchDataMask: true});
+
+    });
+
+    $(document).on('keyup', '.input-lain2', function(){
+        var value = $(this).val();
+        $(this).parents('.bapak-kelompok2').find('.input-nama2').val(value);        
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var max_fields = 100; //maximum input boxes allowed
+        var wrapper = $(".input_fields_wrap_kelompok2"); //Fields wrapper
+        var add_button = $(".add_field_button_kelompok2"); //Add button ID
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+                $(".bapak-kelompok2:first").clone().appendTo(".input_fields_wrap_kelompok2")
+                .find('.select-barang2').prop('name', 'kode[]').end()
+                .find('.input-lain2').prop('name', '').prop('disabled', true).end()
+                .find(".reset-kel2").val('').end()
+                .find(".ubah_icon").removeClass().addClass("btn btn-danger glyphicon glyphicon-remove remove_field_kelompok2");
+            }
+        });
+        $(wrapper).on("click", ".remove_field_kelompok2", function(e) { //user click on remove text
+            e.preventDefault();
+            $(this).parents('div.bapak-kelompok2').remove();
+            x--;
+        })
+    });
+         
+
+        $('.input-total').mask('000.000.000.000.000', {reverse: true});
+    
+</script>
+
