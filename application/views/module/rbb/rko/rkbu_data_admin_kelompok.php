@@ -4,63 +4,58 @@
   }
 </style>
 
+<?php 
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+?>
+
 <div class="row">
   <div class="col-lg-12">
     <div class="hpanel">
       <div class="row">
         <div class="col-sm-1">
           <select class="form-control filter" >
-            <option value="1" selected>Divisi</option>
-            <option value="2" >Kelompok</option>
+            <option value="1" >Divisi</option>
+            <option value="2" selected>Kelompok</option>
           </select>
         </div>
       </div>
       <div class="panel-body">
         <div class="table-responsive">
-          <table id="example" class="table  table-bordered table-hover" style="width:100%">
+          <table id="example" class="table  table-bordered table-hover" >
             <thead>
               <tr>
-                <th style="text-align:center; vertical-align:middle;">Kelompok</th>
-                <th style="text-align:center; vertical-align:middle;">Nama Barang </th>
-                <th style="text-align:center; vertical-align:middle;">Divisi</th>
+                <th style="text-align:center; vertical-align:middle; width:40%">Nama </th>
                 <th style="text-align:center; vertical-align:middle;">Jumlah</th>
-                <th style="text-align:center; vertical-align:middle;">Harga</th>
+                <th style="text-align:center; vertical-align:middle;">Kelompok</th>
+                <th style="text-align:center; vertical-align:middle;">Estimasi Harga</th>
                 <th style="text-align:center; vertical-align:middle;">Total</th>
-                <th style="text-align:center; vertical-align:middle;">Tahun</th>
-                <th style="text-align:center; vertical-align:middle;">Bulan</th>
                 <!-- <th style="text-align:center; vertical-align:middle;">Action</th> -->
               </tr>
             </thead>
             <tbody>
               <?php foreach ($data as $key => $dt) { ?>
                 <tr>
+                  
+                  <td >
+                  <?php echo $dt->barang_nama; ?>
+                  </td>
+                  <td >
+                  <b><?php echo $dt->barang_jumlah; ?></b>
+                  </td>
                   <td style="text-align:center">
-                      <?php echo $dt->rkbu_barang_kelompok; ?>
+                     <b>
+                     <?php echo ($dt->barang_kelompok == 1)? 'KELOMPOK 1': 'KELOMPOK 2';?>
+                     </b>
                   </td>
-                  <td >
-                  <?php echo $dt->rkbu_barang_nama; ?>
-                  </td>
-                  <td >
-                  <b><?php echo $dt->rkbu_divisi; ?></b>
-                  </td>
-                  <td><?php echo $dt->rkbu_jumlah; ?></td>
-                  <td><?php echo number_format($dt->rkbu_estimasi_harga); ?></td>
+                  <td><?php echo number_format($dt->barang_harga); ?></td>
                   <td>
                     <?php 
-                      $total = $dt->rkbu_jumlah*$dt->rkbu_estimasi_harga;
+                      $total = $dt->barang_jumlah*$dt->barang_harga;
                       echo number_format($total); ?>
                       
                     </td>
-                  <td>
-                  <?php echo $dt->rkbu_tahun; ?>
-                  </td>   
-                  <td>
-                  <?php echo parse_bulan_short($dt->rkbu_jadwal_bulan); ?>
-                  </td>   
-                  <!-- <td>
-                    <a class="btn btn-info" href="<?=base_url() ?>rbb/rko/rkbu/edit/<?=$dt->rkbu_id ?>">EDIT</a>
-                    <a class="btn btn-danger" href="<?=base_url() ?>rbb/rko/rkbu/delete/<?=$dt->rkbu_id ?>">Hapus</a>
-                  </td> -->
                 </tr>
               <?php } ?>
             </tbody>

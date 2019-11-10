@@ -8,59 +8,58 @@
   <div class="col-lg-12">
     <div class="hpanel">
       <div class="row">
-        <div class="col-sm-1">
-          <select class="form-control filter" >
-            <option value="1" selected>Divisi</option>
-            <option value="2" >Kelompok</option>
-          </select>
+          <div class="col-sm-1">
+            <select class="form-control filter" >
+              <option value="1" >Divisi</option>
+              <option value="2" selected>Jenis</option>
+            </select>
+          </div>
         </div>
-      </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table id="example" class="table  table-bordered table-hover" style="width:100%">
             <thead>
               <tr>
-                <th style="text-align:center; vertical-align:middle;">Kelompok</th>
-                <th style="text-align:center; vertical-align:middle;">Nama Barang </th>
+                <!-- <th style="text-align:center; vertical-align:middle;">No</th> -->
                 <th style="text-align:center; vertical-align:middle;">Divisi</th>
-                <th style="text-align:center; vertical-align:middle;">Jumlah</th>
-                <th style="text-align:center; vertical-align:middle;">Harga</th>
-                <th style="text-align:center; vertical-align:middle;">Total</th>
-                <th style="text-align:center; vertical-align:middle;">Tahun</th>
+                <th style="text-align:center; vertical-align:middle;">Uraian</th>
+                <th style="text-align:center; vertical-align:middle;">Jenis</th>
+                <th style="text-align:center; vertical-align:middle;">Kepemilikan Aset</th>
+                <th style="text-align:center; vertical-align:middle;">Estimasi Biaya</th>
+                <th style="text-align:center; vertical-align:middle;">Alamat</th>
                 <th style="text-align:center; vertical-align:middle;">Bulan</th>
-                <!-- <th style="text-align:center; vertical-align:middle;">Action</th> -->
               </tr>
             </thead>
             <tbody>
               <?php foreach ($data as $key => $dt) { ?>
                 <tr>
+                  <!-- <td><?=$key?></td> -->
+                  <td >
+                  <b><?php echo $dt->bangun_renovasi_divisi; ?></b>
+                  </td>
+                  <td >
+                  <?php echo $dt->bangun_renovasi_uraian; ?>
+                  </td>
                   <td style="text-align:center">
-                      <?php echo $dt->rkbu_barang_kelompok; ?>
+                      <b>
+                      <?php 
+                      echo $jenis[$dt->bangun_renovasi_jenis]; 
+                      ?>
+                      </b>
                   </td>
-                  <td >
-                  <?php echo $dt->rkbu_barang_nama; ?>
-                  </td>
-                  <td >
-                  <b><?php echo $dt->rkbu_divisi; ?></b>
-                  </td>
-                  <td><?php echo $dt->rkbu_jumlah; ?></td>
-                  <td><?php echo number_format($dt->rkbu_estimasi_harga); ?></td>
+                  <td><?php echo $milikAset[$dt->bangun_renovasi_kepemilikan_aset]; ?></td>
                   <td>
-                    <?php 
-                      $total = $dt->rkbu_jumlah*$dt->rkbu_estimasi_harga;
-                      echo number_format($total); ?>
-                      
-                    </td>
-                  <td>
-                  <?php echo $dt->rkbu_tahun; ?>
+                  <?php echo "Rp ".number_format($dt->bangun_renovasi_anggaran); ?>
                   </td>   
+                  <td><?php echo $dt->bangun_renovasi_alamat; ?></td>
                   <td>
-                  <?php echo parse_bulan_short($dt->rkbu_jadwal_bulan); ?>
+                  <?php foreach($dt->bangun_renovasi_jadwal_bulan as $dtJadwal){ ?>
+                      <ul>
+                        <li><?=parse_bulan($dtJadwal); ?></li>
+                      </ul>
+                  <?php } ?>
                   </td>   
-                  <!-- <td>
-                    <a class="btn btn-info" href="<?=base_url() ?>rbb/rko/rkbu/edit/<?=$dt->rkbu_id ?>">EDIT</a>
-                    <a class="btn btn-danger" href="<?=base_url() ?>rbb/rko/rkbu/delete/<?=$dt->rkbu_id ?>">Hapus</a>
-                  </td> -->
+               
                 </tr>
               <?php } ?>
             </tbody>
@@ -71,21 +70,22 @@
   </div>
 </div>
 
-
 <script>
 $('.filter').change(function(){
   let filterId = $(this).val();
   let base_url = '<?=base_url()?>';
   if(filterId == 2){
-    window.open(base_url+'/rbb/rko/rkbu/show_all_kelompok', '_self');
+    window.open(base_url+'/rbb/rko/bangren/show_all_kelompok', '_self');
   }else if(filterId == 1){
-    window.open(base_url+'/rbb/rko/rkbu/show_all', '_self');
+    window.open(base_url+'/rbb/rko/bangren/show_all', '_self');
   }
 });
 </script>
 
 
- <script>
+
+
+<script>
     $(document).ready(function() {
         var groupColumn = 2;
         var table = $('#example').DataTable({

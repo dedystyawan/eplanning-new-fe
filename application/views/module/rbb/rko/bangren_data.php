@@ -6,6 +6,9 @@
 
 <div class="row">
   <div class="col-sm-12">
+  <?php if($_SESSION['user']->userrole == 1 || $_SESSION['pegawai']->unit_kerja_id =="001UMM") { ?>
+    <a class="btn btn-success pull-left" href="<?=base_url()?>rbb/rko/bangren/show_all" >Rekap</a>
+   <?php } ?>
     <a class="btn btn-success pull-right" href="<?=base_url()?>rbb/rko/bangren/input" >Tambah</a>
   </div>
 </div>

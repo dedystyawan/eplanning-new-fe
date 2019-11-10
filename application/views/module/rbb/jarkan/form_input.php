@@ -34,7 +34,6 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
     }
 </style>
 
-<script src="<?= base_url(); ?>assets/dynamicinput.js"></script>
 
 <div class="row">
     <div class="col-lg-12">
@@ -52,7 +51,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
 <div class="content ">
 
 
-    <div class="row">
+<div class="row">
         <div class="col-lg-12">
             <div class="hpanel">
                 <ul class="nav nav-tabs">
@@ -98,8 +97,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- input Misi -->
-                                    <div class="row">
+                                           <!-- input Misi -->
+                                           <div class="row">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="text-align:left;">Pengusul</label>
                                             <div class="col-sm-10">
@@ -113,6 +112,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                         </div>
                                     </div>
 
+                             
                                     <div class="row">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="text-align:left">Status Proker</label>
@@ -141,6 +141,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                     </div>
 
                                     <hr />
+
 
                                     <div class="row">
                                         <h5>Lokasi</h5>
@@ -180,6 +181,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                     </div>
 
                                     <hr />
+
 
                                     <div class="row">
                                         <div class="table-responsive">
@@ -528,11 +530,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                     </div>
 
 
-
-
-
-                    <!-- untuk perubahan status -->
-                    <div id="tab-2" class="tab-pane">
+                          <!-- untuk perubahan status -->
+                          <div id="tab-2" class="tab-pane">
                         <div class="panel-body">
                             <div class=" col-md-12 bapak-ubah">
                                 <div class="row" style="margin-bottom:10px">
@@ -1002,8 +1001,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                     </div>
 
 
-                    <!-- untuk Relokasi -->
-                    <div id="tab-3" class="tab-pane">
+                             <!-- untuk Relokasi -->
+                             <div id="tab-3" class="tab-pane">
                         <div class="panel-body">
                             <div class=" col-md-12 bapak-relokasi">
                                 <div class="row" style="margin-bottom:10px">
@@ -1041,6 +1040,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                             </div>
                                         </div>
                                     </div>
+
+
 
                                     <div class="row">
                                         <div class="form-group">
@@ -1086,6 +1087,10 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
 
                                     <hr />
 
+
+
+
+
                                     <div class="row">
                                         <h5>Lokasi</h5>
                                     </div>
@@ -1127,6 +1132,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                         </div>
                                     </div>
 
+
+
                                     <div class="row">
                                         <h5>Menjadi</h5>
                                     </div>
@@ -1164,6 +1171,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                         </div>
                                     </div>
 
+
                                     <div class="row">
                                         <h5>Alamat</h5>
                                     </div>
@@ -1187,6 +1195,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                     </div>
 
                                     <hr />
+
 
 
                                     <div class="row">
@@ -1256,6 +1265,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                         </div>
                                     </div>
                                     <hr />
+
 
                                     <!-- -------------------------- jadwal ------------------------ -->
                                     <div class="row">
@@ -1381,6 +1391,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                                     </td>
                                                     <td><input type="text" name="penyiapan_tanah_bangunan_divisi" value="<?= $pic_petb->id; ?>" style="display:none"> <label class=control-label><?= $pic_petb->nama; ?></label></td>
                                                 </tr>
+
+
                                                 <!-- penyiapan infrastruktur pendukung -->
                                                 <tr>
                                                     <td><label class="control-label" style="text-align:left;">Penyiapan Infrastruktur Pendukung</label></td>
@@ -1449,6 +1461,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                                             <?php } ?>
                                                         </Select>
                                                     </td>
+
                                                     <td>
                                                         <Select class="form-control select-psdm_finish" name="pengadaan_sdm_finish" style="max-width:90%">
                                                             <option value="0">--</option>
@@ -1462,6 +1475,8 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                                     </td>
                                                     <td><input type="text" name="pengadaan_sdm_divisi" value="<?= $pic_psdm->id; ?>" style="display:none"> <label class=control-label><?= $pic_psdm->nama; ?></label></td>
                                                 </tr>
+                                                
+                                                       
                                                 <!-- perizinan -->
                                                 <tr>
                                                     <td><label class="control-label" style="text-align:left;">Perizinan</label></td>
@@ -1482,13 +1497,15 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                                             <?php for ($i = 1; $i <= 12; $i++) { ?>
                                                                 <?php $number = $i;
                                                                     $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
-                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo arse_bulan_short($i);
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
                                                                                                                             echo "-" . (date("y") + 1);  ?></option>
                                                             <?php } ?>
                                                         </Select>
                                                     </td>
-                                                    <td><input type="text" name="perijinan_divisi" value="<?= $pic_pizin->id; ?>" style="display:none"> <label class=control-label><?= $pic_pizin->nama; ?></label></td>
+                                                    <td><input type="text" name="perijinan_divisi" value="<?= $pic_pizin->id; ?>" style="display:none"> <label class="control-label"><?= $pic_pizin->nama; ?></label></td>
                                                 </tr>
+
+                                                   
                                                 <!-- pembukaan -->
                                                 <tr>
                                                     <td><label class="control-label" style="text-align:left;">Relokasi</label></td>
@@ -1519,10 +1536,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
                                             </tbody>
                                         </table>
 
-                                    </div>
-
-
-
+                                    </div>  
 
 
                                     <!--//////BUTTON ADD DATANYA ///// -->
@@ -1660,6 +1674,7 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
 
                                     <hr />
 
+
                                     <!-- -------------------------- jadwal ------------------------ -->
                                     <div class="row">
                                         <h5>Jadwal</h5>
@@ -1781,6 +1796,20 @@ $dataTutup = json_decode(file_get_contents(IP_API . '/jaringan/penutupan/tahun/'
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>

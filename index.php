@@ -59,7 +59,7 @@ if ($_SERVER['REMOTE_ADDR'] == "10.64.5.46" || $_SERVER['REMOTE_ADDR'] == "10.64
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 	//define('ENVIRONMENT', 'production');
 } else {
-	define('ENVIRONMENT', 'production');
+	define('ENVIRONMENT', 'development');
 }
 
 /*

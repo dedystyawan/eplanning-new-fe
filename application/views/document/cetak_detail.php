@@ -76,21 +76,31 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
 <!--  jangan dihapus end-->
 
 
-<table align="center" border="1" style="border-collapse:collapse;">
+<table align="center" border="1" style="border-collapse:collapse;" width="700">
   <tr>
-    <th align="center" colspan="2">
+    <th width="700" align="center" colspan="2" >
       <h3><?php echo $data->rkf_proker; ?></h3>
 
     </th>
   </tr>
   <tr>
     <td width="200">
+      <b>Program kerja</b>
+    </td>
+    <td width="400">
+      <?php if ($data->rkf_proker) {
+        echo $data->rkf_proker;
+      } ?>
+    </td>
+  </tr>
+  <!-- <tr>
+    <td width="200">
       <b>RKF ID</b>
     </td>
     <td width="530">
       <?= $data->rkf_id; ?>
     </td>
-  </tr>
+  </tr> -->
   <!-- <tr>
       <td width="200">
           <b>Status</b>
@@ -111,7 +121,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Visi</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($data->rkf_visi)) { ?>
         <?php foreach ($data->rkf_visi as $key => $dt) : ?>
           <?php echo $dt->label . "<br> "; ?>
@@ -125,7 +135,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Misi</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($data->rkf_misi)) { ?>
         <?php foreach ($data->rkf_misi as $key => $dt) : ?>
           <?php echo $dt->label . "<br> "; ?>
@@ -138,29 +148,24 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Coreplan</b>
     </td>
-    <td class="col-sm-9">
+    <td width="400">
       <?php if (!empty($data->rkf_coreplan)) { ?>
         <?php foreach ($data->rkf_coreplan as $key => $dt) : ?>
           <?php $data_corplan = json_decode(file_get_contents(IP_API . "/master/coreplan/detail/" . $dt)); ?>
           <!-- <?php print_r($data_corplan);
                     echo "<br>"; ?> -->
-          <?php echo "Tahun   :";
-              cetak($data_corplan[0]->is_tahun);
-              echo "<br>"; ?>
-          <?php echo "Inisiatif   :";
-              cetak($data_corplan[0]->is_inisiatif_cp);
-              echo "<br>"; ?>
-          <?php echo "Target   :";
-              cetak($data_corplan[0]->is_inisiatif_cp_target);
+          <?php echo "Tahun   :".cetakv2($data_corplan[0]->is_tahun)."<br>"; ?>
+          <?php echo "Inisiatif   :".cetakv2($data_corplan[0]->is_inisiatif_cp)."<br>"; ?>
+          <?php echo "Target   :".cetakv2($data_corplan[0]->is_inisiatif_cp_target);
               echo "<br>"; ?>
           <?php echo "Sasaran   :";
-              cetak($data_corplan[0]->is_sasaran_cp);
+              echo cetakv2($data_corplan[0]->is_sasaran_cp);
               echo "<br>"; ?>
           <?php echo "KPI   :";
-              cetak($data_corplan[0]->is_kpi);
+              echo cetakv2($data_corplan[0]->is_kpi);
               echo "<br>"; ?>
           <?php echo "Target KPI   :";
-              cetak($data_corplan[0]->is_kpi_target);
+              echo cetakv2($data_corplan[0]->is_kpi_target);
               echo "<br>"; ?>
           <hr />
         <?php endforeach; ?>
@@ -171,7 +176,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Kebijakan Umum Direksi</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($all->allKUD)) { ?>
         <?php foreach ($all->allKUD as $dt) {
             if (array_search($dt->kud_id, array_column($data->rkf_kud, 'kud')) !== false) {
@@ -183,21 +188,37 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
       } ?>
     </td>
   </tr>
+
   <tr>
-    <td width="200">
-      <b>Program kerja</b>
-    </td>
-    <td width="530">
-      <?php if ($data->rkf_proker) {
-        echo $data->rkf_proker;
-      } ?>
+    <td class="200"><b>Mendukung Transformasi BPD</b></td>
+    <td class="400">
+      <?php if (!empty($data->rkf_transformasi_bpd)) {
+            $trans_nama = json_decode(file_get_contents(IP_API."/master/transformasibpd/".$data->rkf_transformasi_bpd));
+            echo $trans_nama[0]->transformasi_bpd_nama;
+        }else{
+          echo "Tidak";
+        }
+      ?>
     </td>
   </tr>
+  <tr>
+    <td class="200"><b>Mendukung RAKB</b></td>
+    <td class="400">
+      <?php if (!empty($data->rkf_rakb)) {
+        $rakb_nama = json_decode(file_get_contents(IP_API."/master/rakb/".$data->rkf_rakb));
+          echo $rakb_nama[0]->rakb_nama;
+        }else{
+          echo "Tidak";
+        }
+      ?>
+    </td>
+  </tr>
+  
   <tr>
     <td width="200">
       <b>Status Program Kerja</b>
     </td>
-    <td width="530">
+    <td width="400">
 
       <?php if (!empty($all->allStsProker)) {
         foreach ($all->allStsProker as $dt) {
@@ -212,7 +233,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Skala Program Kerja</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($all->allSkalaProker)) { ?>
         <?php foreach ($all->allSkalaProker as $dt) {
             if ($dt->skala_proker_id == $data->rkf_skala_proker) {
@@ -226,7 +247,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Kategori Program kerja</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($all->allKatProker)) { ?>
         <?php foreach ($all->allKatProker as $dt) {
             if ($dt->kat_proker_id == $data->rkf_kat_proker) {
@@ -240,7 +261,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Prespektif BSC</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($all->allBSC)) { ?>
         <?php foreach ($all->allBSC as $dt) {
             if ($dt->bsc_id == $data->rkf_bsc) {
@@ -254,7 +275,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Kerjasama dengan Konsultan</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($data->rkf_konsultan)) { ?>
         <?php if ($data->rkf_konsultan == 1) {
             echo "Iya";
@@ -269,7 +290,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Tindak Lanjut Audit / Tahun</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($dtAudit['tlnama'])) { ?>
         <?php foreach ($dtAudit['tlnama'] as $key => $dt) {
             echo ($key + 1) . ". " . $dtAudit['tlnama'][$key][0] . " / " . $dtAudit['tahun'][$key][0];
@@ -282,7 +303,7 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     <td width="200">
       <b>Tujuan Program Kerja</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if ($data->rkf_tujuan_proker) { ?>
         <?php foreach ($data->rkf_tujuan_proker as $key => $dt) { ?>
           <?php if (!empty($dt)) {  ?>
@@ -294,25 +315,58 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
     </td>
   </tr>
   <tr>
-    <td width="200">
-      <b>Indikator Keberhasilan</b>
+    <td width="200"><b>Indikator Keberhasilan</b></td>
+    <td width="400"></td>
+    </tr>
+    <tr>
+    <td width="200" style="text-align:center"> Output</td>
+    <td width="400">
+        <ul>
+        <?php if (!empty($data->rkf_indikator->rkf_indikator_output)) {
+          foreach ($data->rkf_indikator->rkf_indikator_output as $key => $dt) {?>
+            <li><?= cetakv2($dt); ?></li>
+          <?php }
+        } else {
+          echo "-";
+        } ?>
+        </ul>
     </td>
-    <td width="530">
-      <?php if (!empty($data->rkf_indikator)) { ?>
-        <?php foreach ($data->rkf_indikator as $key => $dt) { ?>
-          <?php if (!empty($dt)) {  ?>
-            <?php echo ($key + 1) . ". " . $dt; ?>
-            <?php echo "<br>" ?>
-        <?php }
-          } ?>
-      <?php } ?>
+    </tr>
+    <tr>
+    <td width="200" style="text-align:center">Outcome</td>
+    <td width="400">
+        <ul>
+        <?php if (!empty($data->rkf_indikator->rkf_indikator_outcome)) {
+          foreach ($data->rkf_indikator->rkf_indikator_outcome as $key => $dt) {?>
+            <li><?= cetakv2($dt); ?></li>
+          <?php }
+        } else {
+          echo "-";
+        } ?>
+        </ul>
+    </td>
+    </tr>
+    <tr>
+    <td width="200" style="text-align:center">Impact</td>
+    <td width="400">
+        <ul>
+        <?php if (!empty($data->rkf_indikator->rkf_indikator_impact)) {
+          foreach ($data->rkf_indikator->rkf_indikator_impact as $key => $dt) {?>
+            <li><?= cetakv2($dt); ?></li>
+          <?php }
+        } else {
+          echo "-";
+        } ?>
+        </ul>
     </td>
   </tr>
+
+
   <tr>
     <td width="200">
       <b>Jadwal Pelaksanaan /Target Penyelesaian</b>
     </td>
-    <td width="530">
+    <td width="400">
       <?php if (!empty($data->rkf_jadwal)) { ?>
         <?php foreach ($data->rkf_jadwal as $key => $dt) { ?>
           <?php echo $dt == end($data->rkf_jadwal) ? parse_bulan($dt) . "." : parse_bulan($dt) . ",";  ?>
@@ -420,11 +474,12 @@ $data_anggaran = json_decode(file_get_contents(IP_API . "/master/poscoa"));
           <?php
               foreach ($dt->nominal as $key_nominal => $dt_nominal) {
                 echo parse_bulan_short($key_nominal + 1) . " : Rp. ";
-                cetak($dt_nominal);
+                echo (!empty($dt_nominal))? cetakv2(number_format($dt_nominal)): '';
                 echo "<br/>";
               }
               if ($data_angg[0]->pos_coa_jenis_nama == "LABA RUGI") {
-                echo "<b>Total : </b> Rp. " . array_sum($dt->nominal);
+                $total = array_sum($dt->nominal);
+                echo "<b>Total : </b> Rp. " .number_format($total) ;
               }; ?>
         </td>
       </tr>

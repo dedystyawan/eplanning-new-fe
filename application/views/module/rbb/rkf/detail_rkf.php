@@ -1,8 +1,12 @@
 <?php 
+asort($data->rkf_jadwal);
 //  echo "<pre>";
-//  print_r($data);
+//  print_r($data->rkf_jadwal);
 //  echo "</pre>";
+
 ?>
+
+
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
     <div class="hpanel hred">

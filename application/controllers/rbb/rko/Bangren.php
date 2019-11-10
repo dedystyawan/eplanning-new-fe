@@ -17,11 +17,8 @@ class Bangren extends CI_Controller
 
   public function index(){
     // $data = json_decode(file_get_contents(IP_API."/bangren/".$_SESSION['pegawai']->unit_kerja_id));
-     if($_SESSION['user']->userrole == 1){
-    $data = json_decode(file_get_contents(IP_API."/bangren"));
-   }else{
+   
     $data = json_decode(file_get_contents(IP_API."/bangren/".$_SESSION['pegawai']->unit_kerja_id));
-   }
     $jenis = json_decode(file_get_contents(IP_API."/master/jenisbangunrenovasi"));
     $jenis = array_column($jenis, 'jenis_bangun_renovasi_nama', 'jenis_bangun_renovasi_id');
     $milikAset = json_decode(file_get_contents(IP_API."/master/kepemilikanaset"));
@@ -36,15 +33,64 @@ class Bangren extends CI_Controller
     $var['module']          = "";
     // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
     // $var['var_module']      = "rbb/rko/bangren_data";
-    if($_SESSION['user']->userrole == 1){
-      $var['var_module']      = "rbb/rko/bangren_data_admin";
-     }else{
+  
       $var['var_module']      = "rbb/rko/bangren_data";
-     }
     // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
     $var['var_other']       = array();
     $this->load->view('main', $var);
   }
+
+  public function show_all(){
+    // $data = json_decode(file_get_contents(IP_API."/bangren/".$_SESSION['pegawai']->unit_kerja_id));
+    $data = json_decode(file_get_contents(IP_API."/bangren"));
+
+    $jenis = json_decode(file_get_contents(IP_API."/master/jenisbangunrenovasi"));
+    $jenis = array_column($jenis, 'jenis_bangun_renovasi_nama', 'jenis_bangun_renovasi_id');
+    $milikAset = json_decode(file_get_contents(IP_API."/master/kepemilikanaset"));
+    $milikAset = array_column($milikAset, 'kepemilikan_aset_nama', 'kepemilikan_aset_id');
+    $var = array();
+    $var['data'] = $data;
+    $var['jenis'] = $jenis;
+    $var['milikAset'] = $milikAset;
+    $var['var_title']       = "Pembangunan / Renovasi";
+    $var['var_subtitle']    = "RKO";
+    $var['var_breadcrumb']  = array();
+    $var['module']          = "";
+    // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
+    // $var['var_module']      = "rbb/rko/bangren_data";
+      $var['var_module']      = "rbb/rko/bangren_data_admin";
+     
+    // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
+    $var['var_other']       = array();
+    $this->load->view('main', $var);
+  }
+
+  public function show_all_kelompok(){
+    // $data = json_decode(file_get_contents(IP_API."/bangren/".$_SESSION['pegawai']->unit_kerja_id));
+    $data = json_decode(file_get_contents(IP_API."/bangren"));
+
+    $jenis = json_decode(file_get_contents(IP_API."/master/jenisbangunrenovasi"));
+    $jenis = array_column($jenis, 'jenis_bangun_renovasi_nama', 'jenis_bangun_renovasi_id');
+    $milikAset = json_decode(file_get_contents(IP_API."/master/kepemilikanaset"));
+    $milikAset = array_column($milikAset, 'kepemilikan_aset_nama', 'kepemilikan_aset_id');
+    $var = array();
+    $var['data'] = $data;
+    $var['jenis'] = $jenis;
+    $var['milikAset'] = $milikAset;
+    $var['var_title']       = "Pembangunan / Renovasi";
+    $var['var_subtitle']    = "RKO";
+    $var['var_breadcrumb']  = array();
+    $var['module']          = "";
+    // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
+    // $var['var_module']      = "rbb/rko/bangren_data";
+      $var['var_module']      = "rbb/rko/bangren_data_admin_kelompok";
+     
+    // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
+    $var['var_other']       = array();
+    $this->load->view('main', $var);
+  }
+
+
 
   public function form_input(){
     $milikAset = json_decode(file_get_contents(IP_API."/master/kepemilikanaset"));

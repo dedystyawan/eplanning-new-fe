@@ -18,11 +18,8 @@ class Rkbu extends CI_Controller
   // ============================================================
   public function index(){
     // $data = json_decode(file_get_contents(IP_API."/rkbu/".$_SESSION['pegawai']->unit_kerja_id));
-     if($_SESSION['user']->userrole == 1){
-    $data = json_decode(file_get_contents(IP_API."/rkbu"));
-   }else{
+  
     $data = json_decode(file_get_contents(IP_API."/rkbu/".$_SESSION['pegawai']->unit_kerja_id));
-   }
     $var = array();
     $var['data'] = $data;
     $var['var_title']       = "RKBU";
@@ -31,11 +28,122 @@ class Rkbu extends CI_Controller
     $var['module']          = "";
     // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
     // $var['var_module']      = "rbb/rko/rkbu_data";
-    if($_SESSION['user']->userrole == 1){
-      $var['var_module']      = "rbb/rko/rkbu_data_admin";
-     }else{
+    
     $var['var_module']      = "rbb/rko/rkbu_data";
-     }
+    // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
+    $var['var_other']       = array();
+    $this->load->view('main', $var);
+  }
+
+
+  // ============================================================
+
+  public function show_all(){
+    // $data = json_decode(file_get_contents(IP_API."/rkbu/".$_SESSION['pegawai']->unit_kerja_id));
+    $data = json_decode(file_get_contents(IP_API."/rkbu"));
+    $var = array();
+    $var['data'] = $data;
+    $var['var_title']       = "RKBU";
+    $var['var_subtitle']    = "RKO";
+    $var['var_breadcrumb']  = array();
+    $var['module']          = "";
+  // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
+    // $var['var_module']      = "rbb/rko/rkbu_data";
+      $var['var_module']      = "rbb/rko/rkbu_data_admin";
+    // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
+    $var['var_other']       = array();
+    $this->load->view('main', $var);
+  }
+
+
+  // ============================================================
+
+  public function show_all_kelompok(){
+    //data barang yang sudah diinput
+    $data = json_decode(file_get_contents(IP_API."/rkbu"));
+    //data master barang
+    $dataBarang= json_decode(file_get_contents(IP_API."/master/barangall"));
+    // echo "<pre>";
+    //       print_r ($dataBarang);
+    //       echo "</pre>";
+    //       die;
+   //kode barang yang ada di data inputan
+    $kodeBarang = array_column($data, "rkbu_barang_kode");
+    $kodeBarang = array_unique($kodeBarang);
+
+    //cek kode barang di databarang, jika ada maka di push ke array baru barangExist
+    $barangExist= [];
+    foreach($kodeBarang as $key => $dt){
+        if($dt != 0){
+          $dataAda = array_filter($dataBarang, function($var) use($dt){
+              return ($var->barang_id == $dt);
+          });
+          $dataAda = array_values($dataAda);
+          $barangExist[] = $dataAda[0];
+        }else{
+          continue;
+        }
+    }
+
+    //looping cek barang di data, jika ada maka sum jumlah pembeliannya
+    foreach($barangExist as $key => $dt){
+      //ambil id nya dulu
+      $idBarang = $dt->barang_id;
+        // filter barang yang id nya sama seperti idBarang sehingga inputan yang mempunyai id barang yang sama akan berkumpul hahahahaha
+        $barangnya = array_filter($data, function($var) use($idBarang){
+            return ($var->rkbu_barang_kode == $idBarang);
+        });
+
+        //looping barangnya yang sudah di filter untuk mendapatkan jumlah pembeliannya
+        $sum = 0;
+        foreach($barangnya as $keysum => $dtsum){
+          $sum += $dtsum->rkbu_jumlah;
+        }
+        //push index baru ke barangexist untuk simpan jumlahnya
+        $dt->barang_jumlah = $sum;
+    }
+
+    //get data inputan dengan kode 0
+    $barangnyaLain = array_filter($data, function($var){
+        return ($var->rkbu_barang_kode == 0);
+    });
+
+    //looping barang untuk dimasukkan ke barangExist
+    foreach($barangnyaLain as $keylain => $dtlain){
+      $temp= (object)[];
+      $temp->barang_id = $dtlain->rkbu_barang_kode; 
+      $temp->barang_kelompok = $dtlain->rkbu_barang_kelompok; 
+      $temp->barang_nama =  $dtlain->rkbu_barang_nama; 
+      $temp->barang_harga = $dtlain->rkbu_estimasi_harga; 
+      $temp->barang_jumlah = $dtlain->rkbu_jumlah; 
+        // echo "<pre>";
+        // print_r($temp);
+        // echo "</pre>";
+      $barangExist[] = $temp;
+    }
+
+
+    // echo "<pre>";
+    // echo "<br>======================================================================================<br>";
+    // print_r($barangExist);
+    // echo "<br>======================================================================================<br>";
+    // print_r($barangnyaLain);
+    // echo "<br>======================================================================================<br>";
+    // echo "<br>======================================================================================<br>";
+    // print_r($data);
+    // echo "</pre>";
+    // die;
+
+
+    $var = array();
+    $var['data'] = $barangExist;
+    $var['var_title']       = "RKBU";
+    $var['var_subtitle']    = "RKO";
+    $var['var_breadcrumb']  = array();
+    $var['module']          = "";
+    // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
+    // $var['var_module']      = "rbb/rko/rkbu_data";
+      $var['var_module']      = "rbb/rko/rkbu_data_admin_kelompok";
     // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
     $var['var_other']       = array();
     $this->load->view('main', $var);

@@ -1,0 +1,350 @@
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+           
+
+
+
+                                                    <td>
+                                                        <Select class="form-control select-psdm_finish" name="pengadaan_sdm_finish" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td><input type="text" name="pengadaan_sdm_divisi" value="<?= $pic_psdm->id; ?>" style="display:none"> <label class=control-label><?= $pic_psdm->nama; ?></label></td>
+                                                </tr>
+                                                <!-- perizinan -->
+                                                <tr>
+                                                    <td><label class="control-label" style="text-align:left;">Perizinan</label></td>
+                                                    <td>
+                                                        <Select class="form-control select-pizin_start" name="perijinan_start" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td>
+                                                        <Select class="form-control select-pizin_finish" name="perijinan_finish" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo arse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td><input type="text" name="perijinan_divisi" value="<?= $pic_pizin->id; ?>" style="display:none"> <label class=control-label><?= $pic_pizin->nama; ?></label></td>
+                                                </tr>
+                                                <!-- pembukaan -->
+                                                <tr>
+                                                    <td><label class="control-label" style="text-align:left;">Relokasi</label></td>
+                                                    <td>
+                                                        <Select class="form-control select-relo_start" name="relokasi_start" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td>
+                                                        <Select class="form-control select-relo_start" name="relokasi_finish" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td><input type="text" name="relokasi_divisi" value="<?= $pic_pbuka->id; ?>" style="display:none"> <label class=control-label><?= $pic_pbuka->nama; ?></label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+
+
+
+                                    <!--//////BUTTON ADD DATANYA ///// -->
+                                    <div class="row" style="text-align: center;">
+                                        <button type="submit" class="btn btn-success btn-md pull-center"><i class="fa fa-floppy-o pull-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Simpan&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- untuk penutupan -->
+                    <div id="tab-4" class="tab-pane">
+                        <div class="panel-body">
+                            <div class=" col-md-12 bapak-penutupan">
+                                <div class="row" style="margin-bottom:10px">
+                                    <div class="col-md-12 mailbox-pagination m-b-md animated-panel zoomIn" style="animation-delay: 0.3s;">
+                                        <div class="btn-group">
+                                            <button class="btn btn-default btn-sm tutup-kiri"><i class="fa fa-arrow-left"></i></button>
+                                            <button class="btn btn-default btn-sm indexnya" type="button">0</button>
+                                            <button class="btn btn-default btn-sm tutup-kanan"><i class="fa fa-arrow-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- form rkf -->
+                                <form method="post" action="<?= base_url() ?>rbb/rko/jarkan/insert-penutupan" class="form-horizontal" enctype="multipart/form-data" autocomplete="off">
+                                    <!-- baris input visi dan misi -->
+                                    <!-- <div class="row">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" style="text-align:left;">Nama Kantor</label>
+                                                <div class="col-sm-10">
+                                                <input class="form-control" type="text" name="nama_kantor">
+                                                </div>
+                                            </div>
+                                    </div> -->
+                                    <!-- input Misi -->
+                                    <div class="row">
+                                        <input type="text" class="form-control input-id" style="opacity:0" name="tutup_id" value="">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="text-align:left;">Jenis Kantor</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select-jenis_kantor" name="jenis_kantor" style=" max-width: 100%;">
+                                                    <option value="0">--</option>
+                                                    <?php foreach ($jenis_kantor as $dt) { ?>
+                                                        <option value="<?= $dt->jenis_kantor_id ?>"><?= $dt->jenis_kantor_nama ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="text-align:left;">Pengusul</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select-pengusul" name="pengusul" style=" max-width: 100%;">
+                                                    <option>--</option>
+                                                    <?php foreach ($pengusul as $dt) { ?>
+                                                        <option value="<?= $dt->pengusul_id ?>"><?= $dt->pengusul_nama ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="text-align:left">Status Proker</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select-status" name="status" id="">
+                                                    <option>--</option>
+                                                    <?php foreach ($status_proker as $dt) { ?>
+                                                        <option value="<?= $dt->sts_proker_id ?>"><?= $dt->sts_proker_nama ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="text-align:left">Tahun</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select-tahun" name="tahun">
+                                                    <option>--</option>
+                                                    <?php for ($i = 0; $i < 4; $i++) { ?>
+                                                        <option><?= date("Y") + $i ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr />
+
+                                    <div class="row">
+                                        <h5>Lokasi</h5>
+                                    </div>
+
+                                    <div class="row  lokasi-bapak">
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="control-label" style="text-align:left;">Provinsi</label>
+                                                <select class="form-control propinsi select-propinsi" name="propinsi" style=" max-width: 98%;">
+                                                    <option value="0">Pilih propinsi</option>
+                                                    <?php foreach ($propinsi as $dt) { ?>
+                                                        <option value="<?= $dt->propinsi_id ?>"><?= $dt->propinsi_nama ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="control-label" style="text-align:left;">Kabupaten/Kota</label>
+                                                <select class="form-control kota select-kota" name="kota" style=" max-width: 98%;">
+                                                    <option value="0">--</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label class="control-label" style="text-align:left;">Kecamatan</label>
+                                                <select class="form-control kecamatan select-kecamatan" name="kecamatan" style=" max-width: 98%;">
+                                                    <option value="0">--</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <hr />
+
+                                    <!-- -------------------------- jadwal ------------------------ -->
+                                    <div class="row">
+                                        <h5>Jadwal</h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Aktivitas</th>
+                                                    <th>Bulan Mulai</th>
+                                                    <th>Bulan Selesai</th>
+                                                    <th>PIC</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- kajian kelayakan bisnis -->
+                                                <tr>
+                                                    <td><label class="control-label" style="text-align:left;">Kajian Kelayakan Bisnis</label></td>
+                                                    <td>
+                                                        <Select class="form-control select-kkb_start" name="kajian_kelayakan_bisnis_start" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td>
+                                                        <Select class="form-control select-kkb_finish" name="kajian_kelayakan_bisnis_finish" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td><input type="text" name="kajian_kelayakan_bisnis_divisi" value="<?= $pic_kkb->id; ?>" style="display:none"> <label class=control-label><?= $pic_kkb->nama; ?></label></td>
+                                                </tr>
+
+                                                <!-- perizinan -->
+                                                <tr>
+                                                    <td><label class="control-label" style="text-align:left;">Perizinan</label></td>
+                                                    <td>
+                                                        <Select class="form-control select-pizin_start" name="perijinan_start" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td>
+                                                        <Select class="form-control select-pizin_finish" name="perijinan_finish" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td><input type="text" name="perijinan_divisi" value="<?= $pic_pizin->id; ?>" style="display:none"> <label class=control-label><?= $pic_pizin->nama; ?></label></td>
+                                                </tr>
+                                                <!-- Penutupan -->
+                                                <tr>
+                                                    <td><label class="control-label" style="text-align:left;">Penutupan</label></td>
+                                                    <td>
+                                                        <Select class="form-control select-ptutup_start" name="penutupan_start" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td>
+                                                        <Select class="form-control select-ptutup_finish" name="penutupan_finish" style="max-width:90%">
+                                                            <option value="0">--</option>
+                                                            <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                                <?php $number = $i;
+                                                                    $number = str_pad($number, 2, '0', STR_PAD_LEFT); ?>
+                                                                <option value="<?php echo (date("Y") + 1) . $number ?>"><?php echo parse_bulan_short($i);
+                                                                                                                            echo "-" . (date("y") + 1);  ?></option>
+                                                            <?php } ?>
+                                                        </Select>
+                                                    </td>
+                                                    <td><input type="text" name="penutupan_divisi" value="<?= $pic_ptutup->id; ?>" style="display:none"> <label class=control-label><?= $pic_ptutup->nama; ?></label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+
+
+
+                                    <!--//////BUTTON ADD DATANYA ///// -->
+                                    <div class="row" style="text-align: center;">
+                                        <button type="submit" class="btn btn-success btn-md pull-center"><i class="fa fa-floppy-o pull-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Simpan&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,14 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="hpanel">
-
+      <div class="row">
+          <div class="col-sm-1">
+            <select class="form-control filter" >
+              <option value="1" selected>Divisi</option>
+              <option value="2" >Jenis</option>
+            </select>
+          </div>
+        </div>
       <div class="panel-body">
         <div class="table-responsive">
           <table id="example" class="table  table-bordered table-hover" style="width:100%">
@@ -61,6 +68,20 @@
     </div>
   </div>
 </div>
+
+<script>
+$('.filter').change(function(){
+  let filterId = $(this).val();
+  let base_url = '<?=base_url()?>';
+  if(filterId == 2){
+    window.open(base_url+'/rbb/rko/bangren/show_all_kelompok', '_self');
+  }else if(filterId == 1){
+    window.open(base_url+'/rbb/rko/bangren/show_all', '_self');
+  }
+});
+</script>
+
+
 
 
 <script>
