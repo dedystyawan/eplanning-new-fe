@@ -668,23 +668,15 @@ $all->allKUD = array_filter($all->allKUD, function($var){
     $this->load->view('main', $var);
   }
 
-  public function approve_support($id)
+  public function approve_support()
   {
-    $alljson    = file_get_contents(IP_API . "/rkf/rkfdetail/?rkfId=" . $id, false);
-    $data       = json_decode($alljson);
-    $var = array();
-
-    $var['datas'] = $data;
-    $var['var_title']       = "RENCANA KERJA FUNGSI – AKTIF";
-    $var['var_subtitle']    = "Rkf";
-    $var['var_breadcrumb']  = array();
-    $var['module']          = "";
-
-    // var module adalah isi dari tampilan konten tengah yg berada di view/module/ nama module nya
-    $var['var_module']      = "rbb/rkf/detail_rkf_sfl";
-    // var other adalah variabel yang dikirimkan dari kontroller ke view var_module
-    $var['var_other']       = array();
-    $this->load->view('main', $var);
+    $payload['fromRKFId'] = $_POST['fromRKFId'];
+    $payload['toDivisi'] = $_SESSION['pegawai']->unit_kerja_id;
+    $payload['toUser'] = $_SESSION['pegawai']->pegawai_id;
+    $payload = json_encode($payload);
+    $url = IP_API . "/rkf/support";
+    $result = request_api("post", $url, $payload);
+    echo json_encode($result);
   }
 
   

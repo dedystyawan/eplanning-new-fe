@@ -1159,6 +1159,8 @@
                                             <?php  
                                             if($value['unitKerja'] == "B001PPE001"){
                                             $dataPegawai = json_decode(file_get_contents(SDM_API.'/api_v2/pegawai/prc_get_pegawai_per_divisi/'.'001PPE'.'?api_key=prc'))->result[0];
+                                            }else if($value['unitKerja'] == "B001DPL001"){
+                                            $dataPegawai = json_decode(file_get_contents(SDM_API.'/api_v2/pegawai/prc_get_pegawai_per_divisi/'.'001DPL'.'?api_key=prc'))->result[0];
                                             }else{
                                                 $dataPegawai = json_decode(file_get_contents(SDM_API.'/api_v2/pegawai/prc_get_pegawai_per_subdiv/'.$value['unitKerja'].'?api_key=prc'))->result[0];
                                             }
@@ -1813,6 +1815,18 @@ tippy('.tippy-output', {
                 $.ajax({
                 type: "GET",
                 url: sdm_api + "/api_v2/pegawai/prc_get_pegawai_per_divisi/" + "001PPE" + "?api_key=prc",
+                success: function(hasil) {
+                    tagPic.empty();
+                    tagPic.append('<option value="">Pilih PIC</option>');
+                    $.each(hasil.result[0], function(key, value) {
+                        tagPic.append('<option value="' + value.pegawai_id + '">' + value.nama + '</option>');
+                    });
+                }
+            });
+            }else if(subdivID == "B001DPL001"){
+                $.ajax({
+                type: "GET",
+                url: sdm_api + "/api_v2/pegawai/prc_get_pegawai_per_divisi/" + "001DPL" + "?api_key=prc",
                 success: function(hasil) {
                     tagPic.empty();
                     tagPic.append('<option value="">Pilih PIC</option>');

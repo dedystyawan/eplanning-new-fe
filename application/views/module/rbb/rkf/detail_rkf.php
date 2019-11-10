@@ -545,8 +545,8 @@ asort($data->rkf_jadwal);
 
 <script>
   $(document).on("click", ".button_approve", function() {
-    var rkfId = $(this).data("rkfid");
-    var urlnya = "<?= base_url() ?>rbb/rkf/aktivitas/delete";
+    let fromRKFId = $(this).data("rkfid");
+    var urlnya = "<?= base_url() ?>rbb/rkf/approve-sfl";
     swal({
         title: "Jadikan Sebagai Program Kerja Baru?",
         text: '',
@@ -556,9 +556,20 @@ asort($data->rkf_jadwal);
         confirmButtonText: "Ya!"
       },
       function() {
-        window.open('<?= base_url(); ?>rbb/rkf/show-new', '_self');
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            data: {
+              fromRKFId: fromRKFId,
+            },
+            url: urlnya,
+            success: function(data) {
+                console.log(data);
+                if (data) {
+                  window.open('<?= base_url(); ?>rbb/rkf/show-new', '_self');
+                }
+            }
+        });
       });
-
-
   });
 </script>

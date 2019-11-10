@@ -90,6 +90,8 @@ $route['rbb/rkf/cetak/(:any)'] = 'rbb/rkf/rkf/cetak/$1'; //cetak rkf
 $route['rbb/rkf/otor/(:any)'] = 'rbb/rkf/rkf/otor/$1';
 $route['rbb/rkf/sfl/(:any)/(:any)'] = 'rbb/rkf/rkf/v_support/$1/$2';
 $route['rbb/rkf/show-detail-sfl/(:any)'] = 'rbb/rkf/rkf/v_support_detail/$1'; //show detail rkf_sfl
+$route['rbb/rkf/approve-sfl'] = 'rbb/rkf/rkf/approve_support'; //show detail rkf_sfl
+
 
 //----route Aktivitas
 $route['rbb/rkf/aktivitas/show-report/(:any)'] = 'rbb/rkf/aktivitas/laporanmonev/$1'; //
